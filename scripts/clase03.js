@@ -1,59 +1,64 @@
-let nombre = "Alejandro";
-apellido = "Ruiz";
+let edad = 27;
 
-// convertir el nombre en mayusculas:
+document.getElementById("paragraph").innerHTML += `Edad: ${edad} <br>`;
 
-let nombreEnMayusculas = nombre.toUpperCase();
-console.log(nombreEnMayusculas);
-document.getElementById("pharagraph").innerHTML = `${nombreEnMayusculas} <br>`;
+//Incrementa en 2
+edad += 1;
 
-//Convierte el apellido en minusculas:
+document.getElementById("paragraph").innerHTML += `Edad: ${edad} <br>`;
 
-let apellidoEnMinusculas = apellido.toLowerCase();
-console.log(apellidoEnMinusculas);
-document.getElementById(
-  "pharagraph"
-).innerHTML += `${apellidoEnMinusculas} <br>`;
+let peso = 65;
 
-//Devuelve la prima letra de un strig:
+//Decrementa en 2.
+peso -= 2;
 
-let primeraLetraDelNombre = nombre.charAt(0);
-console.log(primeraLetraDelNombre);
-document.getElementById(
-  "pharagraph"
-).innerHTML += `${primeraLetraDelNombre} <br>`;
+document.getElementById("paragraph").innerHTML += `Su peso es: ${peso} <br>`;
 
-//¿Cuantos caracteres tiene un strign?
+//Para sumar dos variables:
 
-let cantidadDeLetrasDelNombre = nombre.length;
-console.log(cantidadDeLetrasDelNombre);
-document.getElementById(
-  "pharagraph"
-).innerHTML += `${cantidadDeLetrasDelNombre} <br>`;
+let sanduche = 1;
 
-//Concatenar 2 string:
-
-let nombreCompleto = nombre + " " + apellido;
-document.getElementById("pharagraph").innerHTML += `${nombre} ${apellido} <br>`;
+peso = peso + sanduche;
 
 document.getElementById(
-  "pharagraph"
-).innerHTML += `${nombre} ${apellido.toUpperCase()} <br>`;
+  "paragraph"
+).innerHTML += `Ahora el peso es = ${peso} <br>`;
 
-//Tomar varios caracteres de un string:
+//Forma de hacer la resta a una misma variable:
 
-let tomarLetrasNombre = nombre.substr(1, 2);
-console.log(tomarLetrasNombre);
-document.getElementById("pharagraph").innerHTML += `${tomarLetrasNombre} <br>`;
-
-//Mostrar la ultima letra del nombre:
-let ultimaLetraDeNombre = nombre.charAt(nombre.length - 1);
-console.log(ultimaLetraDeNombre);
+let hacerDeporte = 4;
+peso -= hacerDeporte;
 document.getElementById(
-  "pharagraph"
-).innerHTML += `${ultimaLetraDeNombre} <br>`;
+  "paragraph"
+).innerHTML += `El nuevo peso luego de la resta es ${peso} <br>`;
 
-/*
-Interpolación de Texto se utiliza con el caracter especial $ y luego "{" "}"
-la variable se escribe en medio.
-*/
+//Manejando decimales:
+
+let vino = 200.3;
+let total = vino * 3;
+document.getElementById(
+  "paragraph"
+).innerHTML += `Total de vinos es ${total} <br>`;
+
+//Para hacer redondeo de js se utiliza math.
+//También se puede utlizar toFixed para indicar el numero de decimales que se quieren.
+
+document.getElementById(
+  "paragraph"
+).innerHTML += `Total de vinos es ${total.toFixed(2)} <br>`;
+
+//parseFloat
+//Para que un string se vuelva número.
+document.getElementById(
+  "paragraph"
+).innerHTML += `Total de vinos Número ${parseFloat(total.toFixed(2))} <br>`;
+
+//Para dividir:
+
+let personas = 2;
+let porciones = 8;
+
+let cantidadDePorcionesPorPersona = porciones / personas;
+document.getElementById(
+  "paragraph"
+).innerHTML += `Cantidad de porciones por persona ${cantidadDePorcionesPorPersona}`;

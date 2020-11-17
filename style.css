@@ -1,0 +1,12 @@
+.clases {
+  display: flex;
+  flex-direction: column;
+}
+
+.clases a {
+  text-decoration: none;
+}
+
+.clases a:hover {
+  background-color: aqua;
+}

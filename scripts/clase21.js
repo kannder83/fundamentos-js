@@ -5,48 +5,37 @@ function escribirHtml(escribir) {
   document.getElementById("paragraph").innerHTML += `${escribir}<br>`;
 }
 
-//Funcion que realiza el proceso de "Heredar":
-function heredaDe(prototipoHijo, prototipoPadre) {
-  let fn = function () {};
-  fn.prototype = prototipoPadre.prototype;
-  prototipoHijo.prototype = new fn();
-  prototipoHijo.prototype.constructor = prototipoHijo;
+//Class Persona
+class Persona {
+  constructor(nombre, apellido, altura) {
+    (this.nombre = nombre), (this.apellido = apellido), (this.altura = altura);
+  }
+  //Se agrega Metodo Saludar:
+  saludar() {
+    console.log(`Hola, me llamo ${this.nombre} ${this.apellido}.`);
+    escribirHtml(`Hola, me llamo ${this.nombre} ${this.apellido}.`);
+  }
+  //Se agrega el Metodo soyAlto
+  soyAlto() {
+    return this.altura > 1.8;
+  }
 }
 
-//Constructor:
-function Persona(nombre, apellido, altura) {
-  (this.nombre = nombre), (this.apellido = apellido), (this.altura = altura);
+//Se crea la clase Desarrollador:
+class Desarrollador extends Persona {
+  constructor(nombre, apellido, altura) {
+    super(nombre, apellido, altura);
+  }
+  //Se crea el metodo Saludar
+  saludar() {
+    escribirHtml(
+      `Hola me llamo ${this.nombre} ${this.apellido} y soy desarrollador.`
+    );
+    console.log(
+      `Hola me llamo ${this.nombre} ${this.apellido} y soy desarrollador.`
+    );
+  }
 }
-
-//Invocar una función: Saludar
-Persona.prototype.saludar = function () {
-  console.log(`Hola, me llamo ${this.nombre} ${this.apellido}.`);
-  escribirHtml(`Hola, me llamo ${this.nombre} ${this.apellido}.`);
-};
-
-//Incocar una funcion: Soy Alto
-Persona.prototype.soyAlto = function () {
-  return this.altura > 1.8;
-};
-
-//Se crea el prototipo Desarrollador:
-function Desarrollador(nombre, apellido) {
-  this.nombre = nombre;
-  this.apellido = apellido;
-}
-
-//Se utiliza la funcion que vincula el prototipoHijo con el prototipoPadre:
-heredaDe(Desarrollador, Persona);
-
-//En el ejemplo se reemplaza solo para Desarrollador la funcion de saludo:
-Desarrollador.prototype.saludar = function () {
-  console.log(
-    `Hola me llamo ${this.nombre} ${this.apellido} y soy desarrollador.`
-  );
-  escribirHtml(
-    `Hola me llamo ${this.nombre} ${this.apellido} y soy desarrollador.`
-  );
-};
 
 //Se crean los objetos de Persona:
 let alejandro = new Persona("Alejandro", "Ruiz", 1.7);
@@ -57,6 +46,7 @@ let diego = new Desarrollador("Diego", "Ortiz", 1.84);
 
 //Se llaman los objetos de Persona:
 alejandro.saludar();
+alejandro.soyAlto();
 
 //Se llama la funcion del prototipo:
 diego.saludar();

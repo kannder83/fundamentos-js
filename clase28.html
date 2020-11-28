@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clase 28 - Encadenar Promesas</title>
+  </head>
+  <body>
+    <h1>Clase 28 - Encadenar Promesas</h1>
+    <p id="descripcion">
+      A diferencia de los callbacks en el CallbackHell, que terminan estando
+      anidados unos dentro de otros, cuando se usan Promesas la ejecución de las
+      llamadas no se hacen de manera anidada sino de manera encadenada, al mismo
+      nivel una debajo de la otra, lo que hace que el código sea mucho más
+      legible y mantenible.
+    </p>
+    <pre>
+      <code id="codigo_programa">
+        const API_URL = "https://swapi.dev/api/";
+        const PEOPLE_URL = "people/:id/";
+        
+        const opts = { crossDomain: true };
+        
+        //Escrbit el HTML:
+        function escribirHtml(texto) {
+          document.getElementById("paragraph").innerHTML += `${texto}`;
+        }
+        
+        function obtenerPersonaje(id) {
+          return new Promise((resolve, reject) => {
+            const url = `${API_URL}${PEOPLE_URL.replace(":id", id)}`;
+        
+            $.get(url, opts, function (data) {
+              resolve(data);
+            }).fail(() => reject(id));
+          });
+        }
+        
+        function onError(id) {
+          console.log(`Sucedió un error al obtener el personaje ${id}`);
+          escribirHtml(`Sucedió un error al obtener el personaje ${id}`);
+        }
+        
+        obtenerPersonaje(1)
+          .then((personaje1) => {
+            console.log(`El personaje 1 es ${personaje1.name}`);
+            escribirHtml(`El personaje 1 es ${personaje1.name}`);
+            return obtenerPersonaje(2);
+          })
+          //Para obtener el otro personaje:
+          .then((personaje2) => {
+            console.log(`El personaje 2 es ${personaje2.name}`);
+            escribirHtml(`El personaje 2 es ${personaje2.name}`);
+            return obtenerPersonaje(3);
+          })
+          .then((personaje3) => {
+            console.log(`El personaje 3 es ${personaje3.name}`);
+            escribirHtml(`El personaje 3 es ${personaje3.name}`);
+            return obtenerPersonaje(4);
+          })
+          .then((personaje4) => {
+            console.log(`El personaje 4 es ${personaje4.name}`);
+            escribirHtml(`El personaje 4 es ${personaje4.name}`);
+            return obtenerPersonaje(5);
+          })
+          .then((personaje5) => {
+            console.log(`El personaje 5 es ${personaje5.name}`);
+            escribirHtml(`El personaje 5 es ${personaje5.name}`);
+            return obtenerPersonaje(6);
+          })
+          .then((personaje6) => {
+            console.log(`El personaje 6 es ${personaje6.name}`);
+            escribirHtml(`El personaje 6 es ${personaje6.name}`);
+            return obtenerPersonaje(7);
+          })
+          .then((personaje7) => {
+            console.log(`El personaje 7 es ${personaje7.name}`);
+            escribirHtml(`El personaje 7 es ${personaje7.name}`);
+          })
+          .catch(onError);
+        
+      </code>
+    </pre>
+    <p id="paragraph"></p>
+    <a href="clase27.html">Clase Anterior</a>
+    <a href="index.html">Home</a>
+    <a href="clase29.html">Siguiente Clase</a>
+
+    <!-- Se llama a jquery -->
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.min.js"
+      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Inician los script de JS -->
+    <script src="/scripts/clase28.js"></script>
+  </body>
+</html>

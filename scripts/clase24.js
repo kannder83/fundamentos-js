@@ -31,4 +31,14 @@ function onPeopleResponse(personaje) {
 
 //La consulta se puede simplificar en:
 
-$.get(LUKE_URL, OPTS, onPeopleResponse);
+function obtenerPersonaje(id) {
+  const URL = `${API_URL}${PEOPLE_URL.replace(":id", id)}`;
+  $.get(URL, OPTS, onPeopleResponse);
+}
+
+//$.get(LUKE_URL, OPTS, onPeopleResponse);
+
+//Se llama a la función.
+obtenerPersonaje(1);
+obtenerPersonaje(2);
+obtenerPersonaje(3);

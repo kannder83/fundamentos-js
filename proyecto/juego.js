@@ -4,10 +4,10 @@
 // los elementos del html.
 // Se definen los botones del juego:
 
-const CELESTE = document.getElementById("celeste");
-const VIOLETA = document.getElementById("violeta");
-const NARANJA = document.getElementById("naranja");
-const VERDE = document.getElementById("verde");
+const celeste = document.getElementById("celeste");
+const violeta = document.getElementById("violeta");
+const naranja = document.getElementById("naranja");
+const verde = document.getElementById("verde");
 const BTN_EMPEZAR = document.getElementById("btnEmpezar");
 
 // 1.Definir el constructor:
@@ -22,6 +22,8 @@ class Juego {
     this.siguienteNivel();
   }
   inicializar() {
+    //Se origaniza el this para evitar confuciones en la seleccion del color.
+    this.elegirColor = this.elegirColor.bind(this);
     //Le agrega una clase CSS al elemento. Esta definida y lo
     //que hace es hacer un display none.
     BTN_EMPEZAR.classList.add("hide");
@@ -29,10 +31,10 @@ class Juego {
     this.nivel = 1;
     //Se crea un objeto con los colores que se van a utilizar:
     this.colores = {
-      celeste: CELESTE,
-      violeta: VIOLETA,
-      naranja: NARANJA,
-      verde: VERDE,
+      celeste,
+      violeta,
+      naranja,
+      verde,
     };
   }
 
@@ -51,6 +53,8 @@ class Juego {
 
   siguienteNivel() {
     this.iluminarSecuencia();
+    //Agregar evento de clic:
+    this.agregarEventosClick();
   }
 
   transformarNumeroAColor(numero) {
@@ -83,9 +87,20 @@ class Juego {
   apagarColor(color) {
     this.colores[color].classList.remove("light");
   }
+
+  agregarEventosClick() {
+    this.colores.celeste.addEventListener("click", this.elegirColor);
+    this.colores.verde.addEventListener("click", this.elegirColor);
+    this.colores.violeta.addEventListener("click", this.elegirColor);
+    this.colores.naranja.addEventListener("click", this.elegirColor);
+  }
+
+  elegirColor(ev) {
+    console.log(this);
+  }
 }
 
 // Se inicia el juego cuando dan clic en el boton:
 function empezarJuego() {
-  let juego = new Juego();
+  window.juego = new Juego();
 }
